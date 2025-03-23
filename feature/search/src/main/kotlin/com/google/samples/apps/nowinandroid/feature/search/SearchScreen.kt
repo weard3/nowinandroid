@@ -151,11 +151,11 @@ internal fun SearchScreen(
         when (searchResultUiState) {
             SearchResultUiState.Loading,
             SearchResultUiState.LoadFailed,
-            -> Unit
+                -> Unit
 
             SearchResultUiState.SearchNotReady -> SearchNotReadyBody()
             SearchResultUiState.EmptyQuery,
-            -> {
+                -> {
                 if (recentSearchesUiState is RecentSearchQueriesUiState.Success) {
                     RecentSearchesBody(
                         onClearRecentSearches = onClearRecentSearches,
@@ -211,7 +211,8 @@ fun EmptySearchResultBody(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(horizontal = 48.dp),
     ) {
-        val message = stringResource(id = searchR.string.feature_search_result_not_found, searchQuery)
+        val message =
+            stringResource(id = searchR.string.feature_search_result_not_found, searchQuery)
         val start = message.indexOf(searchQuery)
         Text(
             text = AnnotatedString(
@@ -457,6 +458,7 @@ private fun SearchToolbar(
                 contentDescription = stringResource(
                     id = string.core_ui_back,
                 ),
+                modifier = Modifier.testTag("return_btn"),
             )
         }
         SearchTextField(
@@ -494,6 +496,7 @@ private fun SearchTextField(
                     id = searchR.string.feature_search_title,
                 ),
                 tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.testTag("search_input_field_icon"),
             )
         },
         trailingIcon = {
@@ -517,6 +520,7 @@ private fun SearchTextField(
             if ("\n" !in it) onSearchQueryChanged(it)
         },
         modifier = Modifier
+            .testTag("search_input_field")
             .fillMaxWidth()
             .padding(16.dp)
             .focusRequester(focusRequester)
